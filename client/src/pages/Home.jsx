@@ -13,7 +13,7 @@ function Home({ darkMode }) {
     setLoading(true);
     setCourses('');
     try {
-      const res = await axios.post('http://localhost:5000/api/recommend', { goals, interests });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/recommend`, { goals, interests });
       setCourses(res.data.courses);
     } catch (error) {
       setCourses('Something went wrong. Try again later.');
