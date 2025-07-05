@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const res = await fetch('http://localhost:5000/auth/user', {
+        const res = await fetch("https://courseadvisor-backend.onrender.com/auth/user", {
           credentials: 'include',
         });
         const data = await res.json();
