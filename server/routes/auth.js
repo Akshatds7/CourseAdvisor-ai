@@ -8,15 +8,15 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 // Step 2: Google redirects here after login
 router.get('/google/callback', passport.authenticate('google', {
-  successRedirect: 'http://localhost:5173/',
-  failureRedirect: 'http://localhost:5173/login'
+  successRedirect: `${process.env.CLIENT_URL}/`,
+  failureRedirect: `${process.env.CLIENT_URL}/login`
 }));
 
 // Step 3: Logout route
 router.get('/logout', (req, res, next) => {
   req.logout(err => {
     if (err) return next(err);
-    res.redirect('http://localhost:5173/login');
+    res.redirect(`${process.env.CLIENT_URL}/login`);
   });
 });
 
