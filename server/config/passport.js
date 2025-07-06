@@ -12,7 +12,7 @@ const users = new Map(); // Mock DB
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: '/auth/google/callback',
+  callbackURL: "https://courseadvisor-backend.onrender.com/auth/google/callback",
 }, (accessToken, refreshToken, profile, done) => {
   const existingUser = users.get(profile.id);
 
