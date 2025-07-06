@@ -8,15 +8,16 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 // Step 2: Google redirects here after login
 router.get('/google/callback', passport.authenticate('google', {
-  successRedirect: `${process.env.CLIENT_URL}/`,
-  failureRedirect: `${process.env.CLIENT_URL}/login`
+  successRedirect: 'https://cadv.netlify.app/',
+  failureRedirect: 'https://cadv.netlify.app/login',
+
 }));
 
 // Step 3: Logout route
 router.get('/logout', (req, res, next) => {
   req.logout(err => {
     if (err) return next(err);
-    res.redirect(`${process.env.CLIENT_URL}/login`);
+    res.redirect('https://cadv.netlify.app/login');
   });
 });
 

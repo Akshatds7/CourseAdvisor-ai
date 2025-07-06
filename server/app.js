@@ -15,24 +15,38 @@ import courseRoutes from './routes/course.js';
 
 const app = express();
 
-// Allow frontend access
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+// ✅ Allow frontend access from both local & Netlify
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://cadv.netlify.app'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
 app.use(express.json());
 
+// ✅ Correct session setup for cross-origin OAuth
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
+  cookie: {
+    sameSite: 'none',
+    secure: true,
+  }
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
+// ✅ Routes
 app.use('/api', aiRoutes);
 app.use('/auth', authRoutes);
 app.use('/courses', courseRoutes);
 
-// Server
+// ✅ Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
