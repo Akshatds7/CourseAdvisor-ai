@@ -29,15 +29,18 @@ app.use(cors({
 app.use(express.json());
 
 // ✅ Correct session setup for cross-origin OAuth
+const isProduction = process.env.NODE_ENV === 'production';
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    sameSite: 'none',
-    secure: true,
-  }
+    sameSite: isProduction ? 'none' : 'lax',
+    secure: isProduction, // only true on Render
+  },
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
