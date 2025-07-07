@@ -29,7 +29,7 @@ app.use(cors({
 app.use(express.json());
 
 // ✅ Correct session setup for cross-origin OAuth
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = true; // Force true for Render deployment
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
