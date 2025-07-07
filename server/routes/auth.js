@@ -26,8 +26,9 @@ router.get('/user', (req, res) => {
   if (req.isAuthenticated()) {
     res.json({ user: req.user });
   } else {
-    res.json({ user: null });
+    res.status(401).json({ user: null });
   }
 });
+
 
 export default router;

@@ -36,8 +36,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    sameSite: isProduction ? 'none' : 'lax',
-    secure: isProduction, // only true on Render
+    secure: true,
+    sameSite: 'none',
   },
 }));
 
